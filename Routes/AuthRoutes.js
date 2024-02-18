@@ -212,7 +212,7 @@ router.post(
 /**
  * @swagger
  * '/auth/reset-password':
- *  post:
+ *  put:
  *     tags:
  *     - Auth
  *     summary: Reset Password
@@ -253,7 +253,7 @@ router.post(
  *      404:
  *        description: Not Found
  */
-router.post(
+router.put(
   "/reset-password",
   validator.body(UserValidationSchema.loginSchema),
   AuthController.resetPassword

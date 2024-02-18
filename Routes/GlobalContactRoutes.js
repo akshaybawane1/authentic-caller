@@ -1,6 +1,4 @@
 const express = require("express");
-const UserValidationSchema = require("../Helpers/Validations/UserValidationSchema");
-const AuthController = require("../Controller/AuthController");
 const router = express.Router();
 const validator = require("express-joi-validation").createValidator({});
 const upload = require("../Helpers/multer");
@@ -106,7 +104,7 @@ router.post(
 /**
  * @swagger
  * '/global/search/{searchStr}':
- *  post:
+ *  get:
  *     security:
  *     - BearerAuth: []
  *     tags:
@@ -146,7 +144,7 @@ router.post(
  *         scheme: bearer
  *         bearerFormat: JWT  # Specify the bearer format if applicable (e.g., JWT)
  */
-router.post(
+router.get(
   "/search/:searchStr",
   authenticateToken,
   GlobalContactController.Search
@@ -155,7 +153,7 @@ router.post(
 /**
  * @swagger
  * '/global/get-user-by-id/{id}':
- *  post:
+ *  get:
  *     security:
  *     - BearerAuth: []
  *     tags:
@@ -195,7 +193,7 @@ router.post(
  *         scheme: bearer
  *         bearerFormat: JWT  # Specify the bearer format if applicable (e.g., JWT)
  */
-router.post(
+router.get(
   "/get-user-by-id/:id",
   authenticateToken,
   GlobalContactController.GetUserById
