@@ -111,6 +111,7 @@ const sendOtp = asyncHandler(async (req, res, next) => {
         where: { phone: phone, isRegistered: true },
       });
     }
+    let otp = "";
 
     if (existingUser) {
       let otpObj = {};
@@ -120,7 +121,7 @@ const sendOtp = asyncHandler(async (req, res, next) => {
       if (phone) {
         otpObj.phone = phone;
       }
-      let otp = Math.floor(Math.random() * 10000)
+      otp = Math.floor(Math.random() * 10000)
         .toString()
         .padStart(4, "0");
       otpObj.otp = otp;
@@ -146,16 +147,16 @@ const sendOtp = asyncHandler(async (req, res, next) => {
         let mailTo = email;
         let mailSubject = "Reset Password";
 
-        const mailResponse = await sendEmail(
-          mailTo,
-          mailSubject,
-          mailContent,
-          smtpUrl,
-          port,
-          secure,
-          username,
-          password
-        );
+        // const mailResponse = await sendEmail(
+        //   mailTo,
+        //   mailSubject,
+        //   mailContent,
+        //   smtpUrl,
+        //   port,
+        //   secure,
+        //   username,
+        //   password
+        // );
       }
 
       if (phone) {
@@ -171,7 +172,12 @@ const sendOtp = asyncHandler(async (req, res, next) => {
       return next(new CreateError("User does not exists", 404));
     }
 
-    res.send({ status: true, message: "Otp sent successfully" });
+    res.send({
+      status: true,
+      otp: otp,
+      message:
+        "Otp sent successfully (For testing I am giving otp in response as here we have dummy email creds)",
+    });
   } catch (error) {
     return next(error);
   }
