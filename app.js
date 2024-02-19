@@ -28,10 +28,10 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`,
+        url: `https://nervous-cyan-pea-coat.cyclic.app`, // server url here
       },
       {
-        url: `http://0.0.0.0:3000`, // server url here
+        url: `http://localhost:${PORT}`,
       },
     ],
     components: {
