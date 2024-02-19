@@ -160,7 +160,12 @@ const sendOtp = asyncHandler(async (req, res, next) => {
 
       if (phone) {
         //Send otp to phone (currently haven't integrated sms so it won't work)
-        return res.send({ status: true, message: "Otp sent successfully" });
+        return res.send({
+          status: true,
+          otp: otp,
+          message:
+            "Otp sent successfully (For testing I am giving otp in response as here we have dummy email creds)",
+        });
       }
     } else {
       return next(new CreateError("User does not exists", 404));
